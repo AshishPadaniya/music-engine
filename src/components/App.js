@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-
+const API_ADDRESS = "https://spotify-api-wrapper.appspot.com"
 
 class App extends Component{
 
-   state = { artistQuery: ' '}
+   state = { artistQuery: '', artis}
 
    updateArtistQuery = event => {
       console.log('event.target.value query' , event.target.value)
@@ -14,6 +14,23 @@ class App extends Component{
    searchArtist = () =>
    {
       console.log('this.state', this.state)
+
+      fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
+         .then(response => response.json())
+         .then(json => {
+            console.log('json', json)
+            
+            
+         })
+         .catch(error => alert(error.message))
+   }
+
+   enterPressed = event => 
+   {
+      console.log('enterpressed event', event)
+      if(event.key === 'Enter'){
+         this.searchArtist();
+      }
    }
    
 
@@ -23,8 +40,13 @@ class App extends Component{
            <h2> Music Engine </h2>
            <input 
                onChange={this.updateArtistQuery}  
-               placeholder='Search for music artist'></input>
-           <button onClick={this.searchArtist}>Search</button>
+               onKeyPress={this.enterPressed}
+               placeholder='Search for music artist'>
+                
+            </input>
+           <button 
+               onClick={this.searchArtist}
+           >Search</button>
         </div>
      )
    }
