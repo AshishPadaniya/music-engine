@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 
-const API_ADDRESS = "https://spotify-api-wrapper.appspot.com"
+const API_ADDRESS = "https://spotify-api-wrapper.appspot.com";
 
 class App extends Component{
 
-   state = { artistQuery: '', artist: null}
+   state = { artistQuery: '', artist: null, tracks: []}
 
    updateArtistQuery = event => {
       console.log('event.target.value query' , event.target.value)
@@ -16,17 +16,22 @@ class App extends Component{
       fetch(`${API_ADDRESS}/artist/${this.state.artistQuery}`)
          .then(response => response.json())
          .then(json => { 
+
+
             if(json.artists.total > 0){
                const artist = json.artists.items[0];
 
                console.log('artist', artist);
                this.setState( { artist: artist })
 
-               
+
                fetch(`${API_ADDRESS}/artist/${artist.id}/top-tracks`)
                   .then(response => response.json())
-                  .then(json => console.log('artist json', json))
-                  .catch(error => error.message)
+                  .then(json => {
+                     this.setState({ tracks: json.tracks})
+                     console.log('tracks',this.state.tracks)
+                  }).catch(error => error.message)
+                  
             }
             
          })
@@ -42,7 +47,7 @@ class App extends Component{
    
 
  render(){
-    console.log('state', this.state)
+    //console.log('state', this.state)
      return(
         <div> 
            <h2> Music Engine </h2>
