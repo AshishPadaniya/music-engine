@@ -7,10 +7,17 @@ const Artist = ({ artist }) => {
 
     const {followers, genres, images, name} = artist;
 
+    var totalFollowers = followers.total.toString();
+
+    if( totalFollowers.length > 5){
+       
+        totalFollowers = totalFollowers.replace(/(\d)(?=(\d{3})+$)/g, '$1,'); 
+    }
+
     return(
         <div>
             <h3>Artist Name: {name}</h3>
-            <p>{followers.total} followers</p>
+            <p>{totalFollowers} followers</p>
             <p> {genres.join(', ')} </p>
             {
                 //check if images is undefined with && guard clause}
@@ -20,7 +27,8 @@ const Artist = ({ artist }) => {
                  style={ {
                      height: 200,
                      width: 200,
-                    borderRadius: 100
+                    borderRadius: 100,
+                    objectFit: 'cover'
                  } }
             />
         </div>
