@@ -12,7 +12,7 @@
 
 
 body{
-
+    background-color: azure;
     text-align: center;
     font-size: 20px;
     padding: 2.5%;
@@ -22,5 +22,55 @@ body{
 h1, h2, h3, h4, h5{
     font-family: 'EconomicaBold';
 
+}
+
+.artist-image{
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    object-fit: 'cover';
+}
+
+.input-box{
+    margin: 10px;
+}
+
+.track {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.track-image{
+    height: 250px;
+    width: 250px;
+    padding: 5px;
+}
+
+.track-text{
+    position: absolute;
+    color: white;
+    background-color: black;
+    padding: 5px;
+   
+    bottom: 0px;
+    width: 250px;
+}
+
+
+.track_icon{
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+    color: white;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    padding: 10px;
+    opacity: 0.8;
 }
 

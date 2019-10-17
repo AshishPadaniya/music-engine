@@ -9,7 +9,7 @@ const Artist = ({ artist }) => {
 
     var totalFollowers = followers.total.toString();
 
-    if (totalFollowers.length > 5) {
+    if (totalFollowers.length > 3) {
 
         totalFollowers = totalFollowers.replace(/(\d)(?=(\d{3})+$)/g, '$1,');
     }
@@ -22,15 +22,8 @@ const Artist = ({ artist }) => {
             {
                 //check if images is undefined with && guard clause}
             }
-            <img src={images[0] && images[0].url}
+            <img className='artist-image' src={images[0] && images[0].url}
                 alt='artist-profile-image'
-                style={{
-                    
-                    height: 200,
-                    width: 200,
-                    borderRadius: 100,
-                    objectFit: 'cover'
-                }}
             />
         </div>
     )

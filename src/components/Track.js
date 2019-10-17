@@ -1,65 +1,70 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 
 
-class Tracks extends Component{
+class Tracks extends Component {
 
-    state = {  playing: false, audio: null , playingPreview: null }
+    state = { playing: false, audio: null, playingPreview: null }
 
-    playAudio = previewUrl => () => 
-    {
+    playAudio = previewUrl => () => {
         if (!previewUrl)
-            return alert('Sorry Preview not available for this track')
+            return null;
 
         const audio = new Audio(previewUrl);
-        
 
 
-        if(!this.state.playing){
-             audio.play();
-             this.setState({playing: true, audio, playingPreview: previewUrl})
-             
-        }else{
+
+        if (!this.state.playing) {
+            audio.play();
+            this.setState({ playing: true, audio, playingPreview: previewUrl })
+
+        } else {
             this.state.audio.pause();
-            
-             
-            if(!(previewUrl === this.state.playingPreview)){
+
+
+            if (!(previewUrl === this.state.playingPreview)) {
                 audio.play();
-                this.setState({audio, playingPreview: previewUrl})
-            }else{
+                this.setState({ audio, playingPreview: previewUrl })
+            } else {
                 this.state.audio.pause()
-                this.setState({playing: false})
+                this.setState({ playing: false })
             }
-            
+
         }
     }
 
-    render(){
-        const {tracks } = this.props;
-        
-        return(
+    trackIcon = track => {
+        if (!track)
+            return <span>N/A</span>;
+
+        if (this.state.playing && this.state.playingPreview == track) 
+            return <span>||</span>;
+
+        return <span>&#9654;</span>
+    }
+
+    render() {
+        const { tracks } = this.props;
+
+        return (
             <div>
-            {
-                tracks.map(track => {
-                    const {id, name, album, preview_url } = track;
-                    
-                    return(
-                       
-                        <div key={id} onClick={this.playAudio(preview_url)}>
-                            <img src={album.images[0].url} alt='album-image'
-                             style={{ 
-                                display: 'inline' ,
-                                margin: 10,
-                                marginBottom: 10,
-                                 height: 200, width: 200, borderRadius: 100,
-                                 objectFit: 'cover' 
-                                }}
-                            />
-                            <p>{name}</p>
-                        </div>
-                    )
-                })
-            }
+                {
+                    tracks.map(track => {
+                        const { id, name, album, preview_url } = track;
+
+                        return (
+
+                            <div className='track'
+                                key={id} onClick={this.playAudio(preview_url)}>
+                                <img className='track-image'
+                                    src={album.images[0].url} alt='album-image'
+                                />
+                                <p className='track-text' >{name}</p>
+                                <p className='track_icon'> {this.trackIcon(track.preview_url)} </p>
+                            </div>
+                        )
+                    })
+                }
             </div>
         )
     }
