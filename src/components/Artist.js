@@ -20,7 +20,7 @@ const Artist = ({ artist }) => {
             <p>{totalFollowers} followers</p>
             <p> {genres.join(', ')} </p>
             {
-                //check if images is undefined with && guard clause}
+                //check if images is undefined with && guard clause checks if images is array at zero is null}
             }
             <img className='artist-image' src={images[0] && images[0].url}
                 alt='artist-profile-image'

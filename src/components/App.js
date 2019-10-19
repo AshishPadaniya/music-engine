@@ -14,6 +14,10 @@ class App extends Component {
    }
 
    searchArtist = artistQuery => {
+      console.log('aristQuery', artistQuery)
+      
+      if(!artistQuery.search("^\s*$")) return null;
+    
       fetch(`${API_ADDRESS}/artist/${artistQuery}`)
          .then(response => response.json())
          .then(json => {
@@ -29,12 +33,12 @@ class App extends Component {
                   .then(json => {
                      this.setState({ tracks: json.tracks })
                      // console.log('tracks', this.state.tracks)
-                  }).catch(error => alert(error.message))
+                  }).catch(error => alert('first'+error.message))
 
             }
 
          })
-         .catch(error => alert(error.message))
+         .catch(error => alert('Second'+error.message))
    }
 
 
