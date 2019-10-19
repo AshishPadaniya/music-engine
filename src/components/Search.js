@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 
 
 class Search extends Component {
-    state = { artistQuery: 'bruno' }
+    state = { artistQuery: '' }
 
     updateArtistQuery = event => {
-        console.log('event.target.value query', event.target.value)
+        // console.log('event.target.value query', event.target.value)
         this.setState({ artistQuery: event.target.value })
     }
 

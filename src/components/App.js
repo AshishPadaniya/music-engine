@@ -20,7 +20,7 @@ class App extends Component {
             if (json.artists.total > 0) {
                const artist = json.artists.items[0];
 
-               console.log('artist', artist);
+               // console.log('artist', artist);
                this.setState({ artist: artist })
 
 
@@ -28,7 +28,7 @@ class App extends Component {
                   .then(response => response.json())
                   .then(json => {
                      this.setState({ tracks: json.tracks })
-                     console.log('tracks', this.state.tracks)
+                     // console.log('tracks', this.state.tracks)
                   }).catch(error => alert(error.message))
 
             }
